@@ -79,9 +79,11 @@ function App() {
       <section className="text-gray-600 body-font">
         <div className="container px-5 mx-auto">
 
-          <button onClick={signup}
-            className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-            Log in with Civic
+          <button onClick={signup} id="civicButton" className={`civic-button civic-button-bold mx-auto focus:outline-none`}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="#FFFFFF">
+              <path d="M2.364 8c0-3.36 2.716-6.08 6.06-6.08a6.057 6.057 0 015.328 3.178.96.96 0 101.687-.916A7.977 7.977 0 008.425 0C4.015 0 .444 3.584.444 8s3.57 8 7.98 8a7.977 7.977 0 007.015-4.182.96.96 0 00-1.687-.916 6.056 6.056 0 01-5.327 3.178c-3.345 0-6.061-2.72-6.061-6.08z"/><path d="M9.884 7.04c0 .426-.186.81-.48 1.073V10.4h-1.92V8.113a1.44 1.44 0 112.4-1.073z"/>
+            </svg>
+            Continue with Civic
           </button>
 
         </div>

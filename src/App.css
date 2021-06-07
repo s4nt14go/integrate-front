@@ -5,3 +5,35 @@
 body {
   background-color: rgba(243, 244, 246, 1);  /* bg-gray-100 */
 }
+
+.civic-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+  height: 36px;
+  line-height: 34px;
+  padding: 0 20px;
+  min-width: 220px;
+  border-radius: 18px;
+  border: 1px solid #3AB03E;
+  background-color: #3AB03E;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  font-family: 'Source Sans Pro', sans-serif;
+  transition: all 0.2s ease;
+}
+.civic-button:hover {
+  background-color: #008C04;
+}
+.civic-button svg {
+  margin-right: 7px;
+  transition: all 0.225s ease;
+}
+.civic-button-bold {
+  font-weight: 600;
+}
