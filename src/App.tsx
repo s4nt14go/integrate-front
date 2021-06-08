@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, {useEffect} from 'react';
 import './App.css';
 import Header from "./components/Header";
@@ -6,11 +5,12 @@ import loadCivic from './scripts/load.js';
 
 const { REACT_APP_appId: appId } = process.env;
 
-var civicSip;
+let civicSip: any;
 function App() {
 
   useEffect(() => {
     loadCivic(() => {
+      // @ts-ignore
       civicSip = new window.civic.sip({
         appId,
         // OPTIONAL configuration
