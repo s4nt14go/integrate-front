@@ -1,13 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import './App.css';
 import Header from "./components/Header";
 import loadCivic from './scripts/load.js';
+import Notification, {Severity} from "./components/Notification";
+import config from './config';
 
 const { REACT_APP_appId: appId } = process.env;
 
 let civicSip: any;
 function App() {
 
+  const NotificationRef = useRef<any>();
   useEffect(() => {
     loadCivic(() => {
       // @ts-ignore
@@ -21,6 +24,7 @@ function App() {
       // Listen for data
       civicSip.on('auth-code-received', function (event: any) {
         console.log('auth-code-receive', event);
+        NotificationRef.current.start(event.event, Severity.SUCCESS);
         /*
             event:
             {
@@ -31,14 +35,15 @@ function App() {
         */
 
         // encoded JWT Token is sent to the server
-        var jwtToken = event.response;
+        const jwtToken = event.response;
 
         // Your function to pass JWT token to your server
-        console.log('TODO: sendAuthCode(jwtToken)');
+        sendAuthCode(jwtToken);
       });
 
       civicSip.on('user-cancelled', function (event: any) {
         console.log('user-cancelled', event);
+        NotificationRef.current.start(event.event, Severity.INFO);
         /*
             event:
             {
@@ -48,6 +53,7 @@ function App() {
       });
       civicSip.on('read', function (event: any) {
         console.log('read', event);
+        NotificationRef.current.start(event.event, Severity.INFO);
         /*
             event:
             {
@@ -62,9 +68,27 @@ function App() {
         // handle error display if necessary.
         console.log('   Error type = ' + error.type);
         console.log('   Error message = ' + error.message);
+        NotificationRef.current.start(error.toString(), Severity.ERROR);
       });
     });
   }, []);
+
+  function sendAuthCode(jwtToken: string) {
+    fetch(`${config.API_URL}/exchange-code`, {
+      method: 'POST',
+      body: jwtToken,
+    })
+      .then(response => {
+        console.log('response', response);
+        return response.json();
+      })
+      .then(data => {
+        console.log('Resolved:', data);
+      })
+      .catch((error) => {
+        console.log('Rejected:', error);
+      });
+  }
 
   function signup(){
     civicSip.signup({ style: 'popup', scopeRequest: civicSip.ScopeRequests.BASIC_SIGNUP });
@@ -89,6 +113,7 @@ function App() {
         </div>
       </section>
       </div>
+      <Notification ref={NotificationRef} />
     </div>
   );
 }
