@@ -1,8 +1,10 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './App.css';
 import Header from "./components/Header";
 import loadCivic from './scripts/load.js';
 import Notification, {Severity} from "./components/Notification";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import styles from "./App.module.css";
 import config from './config';
 
 const { REACT_APP_appId: appId } = process.env;
@@ -11,6 +13,7 @@ let civicSip: any;
 function App() {
 
   const NotificationRef = useRef<any>();
+  const [ results, setResults ] = useState<any>(null);
   useEffect(() => {
     loadCivic(() => {
       // @ts-ignore
@@ -84,9 +87,11 @@ function App() {
       })
       .then(data => {
         console.log('Resolved:', data);
+        setResults(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log('Rejected:', error);
+        setResults(error);
       });
   }
 
@@ -112,6 +117,18 @@ function App() {
 
         </div>
       </section>
+
+        <div className='mt-8 text-left'>
+          {
+            results &&
+            <div className='mb-5'>
+              <SyntaxHighlighter language='json' className={`${styles.json}`}>
+                {JSON.stringify(results, null, 2)}
+              </SyntaxHighlighter>
+            </div>
+          }
+        </div>
+
       </div>
       <Notification ref={NotificationRef} />
     </div>
