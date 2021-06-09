@@ -7,8 +7,6 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import styles from "./App.module.css";
 import config from './config';
 
-const { REACT_APP_appId: appId } = process.env;
-
 let civicSip: any;
 function App() {
 
@@ -18,7 +16,7 @@ function App() {
     loadCivic(() => {
       // @ts-ignore
       civicSip = new window.civic.sip({
-        appId,
+        appId: config.APP_ID,
         // OPTIONAL configuration
         hideIntro: false, // set to true to override intro screen (Proof of Identity only)
       });
