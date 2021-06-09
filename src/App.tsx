@@ -96,6 +96,7 @@ function App() {
   }
 
   function signup(){
+    setResults(null);
     civicSip.signup({ style: 'popup', scopeRequest: civicSip.ScopeRequests.BASIC_SIGNUP });
   }
 
