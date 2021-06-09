@@ -12,6 +12,7 @@ function Header(){
       </div>
       <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Integration Exercise</h1>
       <p className="lg:w-2/3 mx-auto leading-relaxed text-base"><a href="https://docs.civic.com" target='_blank' rel="noreferrer" className='underline text-blue-600 hover:text-blue-800 visited:text-purple-600'>Reference Guide</a></p>
+      <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Source code in this <a href="https://github.com/s4nt14go/integrate-front" target='_blank' rel="noreferrer" className='underline text-blue-600 hover:text-blue-800 visited:text-purple-600'>repo</a></p>
     </div>
   </section>
 }
