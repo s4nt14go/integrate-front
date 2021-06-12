@@ -3,7 +3,7 @@
 
 Integration using [Civic Integration Portal](https://integrate.civic.com)
 
-### ✨ [Check the demo site](https://civic-integrate.netlify.app)<br />
+### ✨ [Check the demo site](https://civic-integration.netlify.app)<br />
 
 # Backend
 In [this repo](https://github.com/s4nt14go/integrate-back) you can take a look at the backend
